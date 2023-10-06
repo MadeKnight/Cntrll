@@ -3,7 +3,7 @@
     private static IFix homeworks;
     static void Main()
     {
-        Tasker(5);
+        Tasker(3);
     }
 
     static void Tasker(int task)
@@ -24,6 +24,9 @@
                 break;
             case 5:
                 homeworks = new HomeWork5();
+                break;
+            default: 
+                Console.WriteLine("Неверно указан номер домашнего задания: ");
                 break;
         }
 
