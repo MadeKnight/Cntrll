@@ -1,43 +1,66 @@
-// Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами. 
-//Напишите программу, которая покажет количество чётных чисел в массиве.
-// [345, 897, 568, 234] -> 2
+// Задача 41: Пользователь вводит с клавиатуры M чисел. 
+// Посчитайте, сколько чисел больше 0 ввёл пользователь.
+// 0, 7, 8, -2, -2 -> 2
+// 1, -7, 567, 89, 223-> 3
 
 using System;
+using System.Formats.Asn1;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Dataflow;
+using System.Xml.XPath;
+using Microsoft.VisualBasic;
 using static Controller;
 
 public class HomeWork1 : BaseRoom
 {
-    int evenNumber = 0;
-    int[] someNumbers;
+    private string msg = "Введите число: ";
+    private string cancelMsg = "Ддя прекращения опперации введите: стоп";
+    private string resultMsg = "Колличество чисел больше 0: ";
+    private int positivNum = 0;
+    private bool itsCanceled = false;
+    private List<int> numList = new List<int>();
     public override void Start()
     {
-        CreateArray();
+        CreateList();
+        CompareToZero();
+    }
+    private bool CancelOpperation(bool cancel)
+    {
+        itsCanceled = cancel;
+        return itsCanceled;
     }
 
-    private void CreateArray()
+    private void CreateList()
     {
-        int arrayNumber = RandomFiller(3, 11);
-        someNumbers = new int[arrayNumber];
-
-        for (int i = 0; i < arrayNumber; i++)
+        Console.WriteLine(cancelMsg);
+        
+        while (!itsCanceled)
         {
-            someNumbers[i] = RandomFiller(100, 1000);
-            Console.WriteLine($"Число массива: {someNumbers[i]}");
-        }
+            Console.WriteLine(msg);
+            string numX = Console.ReadLine();
 
-        foreach (int elem in someNumbers)
-        {
-            if ((elem % 2) == 0) evenNumber++;
-        }
+            if (numX.ToLower() == "стоп")
+            {
+                CancelOpperation(true);
+                break;
+            }
 
-        Console.WriteLine($"Количество чётных чисел массива: {evenNumber}");
+            numList.Add(Convert.ToInt32(numX));
+        }
     }
 
-    private int RandomFiller(int start, int end)
+    private void CompareToZero()
     {
-        Random rnd = new Random();
-        int evenarray = rnd.Next(start, end);
-        return evenarray;
+        foreach (int element in numList)
+        {
+            if (element > 0) positivNum++; 
+        }
+
+        Console.WriteLine(resultMsg + $"{positivNum}");
     }
 }
+    
+
+
 

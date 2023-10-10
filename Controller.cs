@@ -1,9 +1,10 @@
 ﻿public static class Controller
 {
+    private static int homeWorkNumber = 1;
     private static IFix homeworks;
     static void Main()
     {
-        Tasker(3);
+        Tasker(homeWorkNumber);
     }
 
     static void Tasker(int task)

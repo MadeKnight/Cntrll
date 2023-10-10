@@ -1,44 +1,30 @@
-// Задача 36: Задайте одномерный массив, заполненный случайными числами. 
-// Найдите сумму элементов, стоящих на нечётных позициях.
-// [3, 7, 23, 12] -> 19
-// [-4, -6, 89, 6] -> 0
+// //  Задача 43. Напишите программу, которая найдёт точку пересечения двух прямых, заданных уравнениями y = k1 * x + b1 y = k2 * x + b2 значения b1, k1, b2 и k2 задаются пользователем.
 
 
-using System;
-using System.Xml.XPath;
 using static Controller;
 
 public class HomeWork2 : BaseRoom
 {
-    int evenNumber = 0;
-    int[] someNumbers;
+    double numberB1 = ValueNumbers("Введите число B1: ");
+    double numberK1 = ValueNumbers("Введите число K1: ");
+    double numberB2 = ValueNumbers("Введите число B2: ");
+    double numberK2 = ValueNumbers("Введите число K2: ");
+
     public override void Start()
     {
-        CreateArray();
+        Crossinglines();
     }
 
-    private void CreateArray()
+    private void Crossinglines()
     {
-        int arrayNumber = RandomFiller(5, 10);
-        someNumbers = new int[arrayNumber];
-
-        for (int i = 0; i < arrayNumber; i++)
-        {
-            someNumbers[i] = RandomFiller(3, 10);
-            Console.WriteLine($"Число массива: {someNumbers[i]}");
-        }
-
-        for(int i = 1; i < arrayNumber; i+=2 )
-        {
-            evenNumber += someNumbers[i];
-        }
-        Console.WriteLine($"Сумма элементов, стоящих на нечётных позициях: {evenNumber}");
+        double x = (-numberB2 + numberB1) / (-numberK1 + numberK2);
+        double y = numberK2 * x + numberB2;
+        Console.WriteLine($"две прямые пересекутся в точке с координатами X: {x}, Y: {y}");
     }
 
-    private int RandomFiller(int start, int end)
+    private static double ValueNumbers(string message)
     {
-        Random rnd = new Random();
-        int evenarray = rnd.Next(start, end);
-        return evenarray;
+        Console.WriteLine(message);
+        return Convert.ToInt32(Console.ReadLine());
     }
 }
